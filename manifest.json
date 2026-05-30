@@ -1,8 +1,8 @@
 {
   "name": "운동일지",
   "short_name": "운동일지",
-  "start_url": "/workout-app/",
-  "scope": "/workout-app/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#111111",
   "theme_color": "#111111",
