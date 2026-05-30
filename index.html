@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>운동일지 v3.0</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#111111">
+
+</head>
+
+<body>
+
+<h1>운동일지</h1>
+
+<div id="statsSection">
+
+<div class="statCard">
+<h3>🏆 최고기록 TOP5</h3>
+<div id="prStats">
+기록 없음
+</div>
+
+<div id="prCards"></div>
+
+<div id="prCards">
+</div>
+</div>
+
+<div class="statCard">
+<h3>📈 이번 달</h3>
+<div id="monthStats">
+기록 없음
+</div>
+
+<div id="weeklyReport">
+📅 이번 주 리포트 없음
+</div>
+
+<div id="monthlyReport">
+📆 이번 달 리포트 없음
+</div>
+
+<div id="goalWeightBox">
+<input id="goalWeightInput" type="number" placeholder="목표 체중 kg">
+<button onclick="saveGoalWeight()">목표 저장</button>
+<div id="goalWeightResult">목표 체중 없음</div>
+</div>
+
+<div id="streakBox">
+🔥 0일 연속 운동
+</div>
+
+<div id="volumeBox">
+🏋️ 오늘 총 운동량 : 0kg
+</div>
+</div>
+
+</div>
+
+<div id="monthControl">
+
+<div id="settingsWrapper">
+
+<button onclick="toggleSettings()">
+⚙️ 설정
+</button>
+
+<div id="settingsPanel">
+
+<button onclick="backupData()">
+💾 백업
+</button>
+
+<button onclick="document.getElementById('restoreFile').click()">
+📂 복원
+</button>
+
+<button onclick="resetAllData()">
+⚠ 전체 초기화
+</button>
+
+</div>
+
+</div>
+
+<div id="settingsPanel">
+
+<button onclick="backupData()">
+💾 백업
+</button>
+
+<button onclick="document.getElementById('restoreFile').click()">
+📂 복원
+</button>
+
+<button onclick="resetAllData()">
+⚠ 전체 초기화
+</button>
+
+</div>
+
+<button onclick="prevMonth()">
+◀
+</button>
+
+<span id="monthTitle"></span>
+
+<button onclick="nextMonth()">
+▶
+</button>
+
+<button onclick="toggleGraphs()">
+성장 그래프
+</button>
+
+</div>
+
+<div id="settingsPanel">
+
+<button onclick="backupData()">
+💾 백업
+</button>
+
+<button onclick="document.getElementById('restoreFile').click()">
+📂 복원
+</button>
+
+<button onclick="resetAllData()">
+⚠ 전체 초기화
+</button>
+
+<input
+type="file"
+id="restoreFile"
+accept=".json"
+style="display:none"
+onchange="restoreData(event)">
+
+</div>
+
+<div id="weekdays">
+
+<div>월</div>
+<div>화</div>
+<div>수</div>
+<div>목</div>
+<div>금</div>
+<div>토</div>
+<div>일</div>
+
+</div>
+
+<div id="calendar"></div>
+
+<h2 id="selectedDate">
+날짜 선택
+</h2>
+
+<div id="dayPreview">
+기록 없음
+</div>
+
+<div id="workoutSection">
+
+<h3>운동 기록</h3>
+
+<div class="inputRow">
+
+<select id="part" onchange="updateExercises()">
+<option value="">부위 선택</option>
+<option value="가슴">가슴</option>
+<option value="등">등</option>
+<option value="어깨">어깨</option>
+<option value="팔">팔</option>
+<option value="하체">하체</option>
+</select>
+
+<select id="exercise">
+<option value="">운동 선택</option>
+</select>
+
+</div>
+
+<div class="inputRow">
+
+<input
+id="weight"
+type="number"
+placeholder="무게 kg">
+
+<button onclick="changeWeight(-10)">
+-10</button>
+
+<button onclick="changeWeight(-5)">
+-5</button>
+
+<button onclick="changeWeight(5)">
++5</button>
+
+<button onclick="changeWeight(10)">
++10</button>
+
+<input
+id="sets"
+type="number"
+placeholder="세트">
+
+<input
+id="reps"
+type="number"
+placeholder="횟수">
+
+<input
+id="bodyWeight"
+type="number"
+placeholder="오늘 체중 kg">
+
+<button onclick="saveTodayWeight()">
+체중 저장
+</button>
+
+</div>
+
+<button onclick="loadLastRecord()">
+최근 기록 불러오기
+</button>
+
+<button id="saveButton">
+기록 저장
+</button>
+
+<h3>기록 목록</h3>
+
+<ul id="list"></ul>
+
+</div>
+
+<div id="cardioSection">
+
+<h3>🏃 유산소 칼로리 계산기</h3>
+
+<input id="cardioHeight" type="number" placeholder="키 cm">
+
+<input id="cardioWeight" type="number" placeholder="몸무게 kg">
+
+<input id="incline" type="number" placeholder="경사도 %">
+
+<input id="speed" type="number" placeholder="속도 km/h">
+
+<input id="cardioTime" type="number" placeholder="운동시간 분">
+
+<button onclick="calculateCardioCalories()">
+칼로리 계산
+</button>
+<button onclick="saveCardioWorkout()">
+유산소 기록 저장
+</button>
+
+<div id="cardioResult">
+소모 칼로리 : 0 kcal
+</div>
+
+</div>
+
+<div id="graphSection">
+
+<h2>
+성장 그래프
+</h2>
+
+<select id="graphExercise">
+
+<option value="">
+운동 선택
+</option>
+
+</select>
+
+<h3>운동 무게 변화</h3>
+
+<canvas
+id="exerciseGraph"
+width="800"
+height="300">
+</canvas>
+
+<h3>체중 변화</h3>
+
+<canvas
+id="bodyGraph"
+width="800"
+height="300">
+</canvas>
+
+</div>
+
+<div id="graphTooltip"></div>
+
+<script src="script.js"></script>
+
+<script>
+
+if("serviceWorker" in navigator){
+
+    navigator.serviceWorker.register(
+        "service-worker.js"
+    );
+
+}
+
+</script>
+
+<footer id="appVersion">
+운동일지 v5.0
+</footer>
+
+</body>
+</html>

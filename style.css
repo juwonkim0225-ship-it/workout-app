@@ -1,0 +1,453 @@
+body{
+    font-family:'Segoe UI',Arial,sans-serif;
+    margin:0;
+    padding:30px;
+    background:linear-gradient(135deg,#111,#1d1d1d);
+    color:white;
+    min-height:100vh;
+}
+
+h1{
+    text-align:center;
+    font-size:42px;
+    margin-bottom:25px;
+}
+
+#statsSection{
+    max-width:1000px;
+    margin:0 auto 25px auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.statCard{
+    background:#1e1e1e;
+    border-radius:15px;
+    padding:20px;
+    border:1px solid #333;
+}
+
+.statCard h3{
+    margin-top:0;
+    margin-bottom:15px;
+}
+
+#monthControl{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    margin:20px 0;
+    flex-wrap:wrap;
+}
+
+#monthTitle{
+    font-size:28px;
+    font-weight:bold;
+    margin:0 15px;
+}
+
+#weekdays,
+#calendar{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:10px;
+    max-width:1000px;
+    margin:auto;
+}
+
+#weekdays{
+    text-align:center;
+    margin-bottom:10px;
+    font-weight:bold;
+}
+
+.day{
+    height:85px;
+    background:#242424;
+    border:2px solid #555;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    position:relative;
+    transition:.15s;
+    font-size:20px;
+}
+
+.day:hover{
+    background:#333;
+}
+
+.today{
+    font-size:17px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.selected{
+    background:white;
+    color:black;
+    border-color:white;
+}
+
+.recordCount{
+    position:absolute;
+    right:6px;
+    bottom:6px;
+    min-width:24px;
+    height:24px;
+    padding:0 6px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:white;
+    color:black;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:900;
+    z-index:5;
+}
+
+#selectedDate{
+    text-align:center;
+    margin-top:25px;
+    margin-bottom:15px;
+    font-size:28px;
+}
+
+#workoutSection,
+#graphSection{
+    display:none;
+    max-width:1000px;
+    margin:25px auto;
+    background:#1e1e1e;
+    border-radius:15px;
+    padding:25px;
+}
+
+.inputRow{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+input,
+select{
+    flex:1;
+    min-width:140px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#2f2f2f;
+    color:white;
+}
+
+button{
+    padding:12px 16px;
+    border:none;
+    border-radius:10px;
+    background:white;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#e5e5e5;
+}
+
+#saveButton{
+    margin-top:10px;
+    width:100%;
+}
+
+ul{
+    padding:0;
+}
+
+li{
+    list-style:none;
+    background:#2a2a2a;
+    margin:10px 0;
+    padding:12px;
+    border-radius:10px;
+}
+
+canvas{
+    width:100%;
+    background:#111;
+    border-radius:15px;
+    margin-top:10px;
+}
+
+#prStats,
+#monthStats{
+    line-height:1.8;
+}
+
+@media(max-width:700px){
+
+    body{
+        padding:15px;
+    }
+
+    #statsSection{
+        grid-template-columns:1fr;
+    }
+
+    .day{
+        height:65px;
+        font-size:16px;
+    }
+
+    #weekdays,
+    #calendar{
+        gap:5px;
+    }
+
+}
+#dayPreview{
+
+    max-width:1000px;
+
+    margin:0 auto 15px auto;
+
+    background:#1e1e1e;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    line-height:1.8;
+
+}
+#graphTooltip{
+
+    position:fixed;
+
+    background:#ffffff;
+
+    color:#000000;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    pointer-events:none;
+
+    display:none;
+
+    z-index:9999;
+
+}
+#streakBox{
+
+    margin-top:15px;
+
+    background:#2a2a2a;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+}
+#volumeBox{
+
+    margin-top:15px;
+
+    background:#2a2a2a;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+}
+#cardioSection{
+
+    max-width:1000px;
+
+    margin:25px auto;
+
+    background:#1e1e1e;
+
+    border-radius:15px;
+
+    padding:25px;
+
+}
+
+#cardioSection input{
+
+    width:100%;
+
+    margin-bottom:10px;
+
+}
+
+#cardioResult{
+
+    margin-top:15px;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+}
+#prCards{
+
+    margin-top:15px;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(140px,1fr));
+
+    gap:10px;
+
+}
+
+.prCard{
+
+    background:#2a2a2a;
+
+    border-radius:10px;
+
+    padding:12px;
+
+    text-align:center;
+
+}
+
+.prCardName{
+
+    font-size:14px;
+
+    opacity:.8;
+
+}
+
+.prCardWeight{
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    margin-top:5px;
+
+}
+#goalWeightBox{
+    margin-top:15px;
+    background:#2a2a2a;
+    padding:12px;
+    border-radius:10px;
+}
+
+#goalWeightBox input{
+    width:100%;
+    box-sizing:border-box;
+    margin-bottom:8px;
+}
+
+#goalWeightResult{
+    margin-top:10px;
+    font-weight:bold;
+}
+#weeklyReport{
+    margin-top:15px;
+    background:#2a2a2a;
+    padding:12px;
+    border-radius:10px;
+    font-weight:bold;
+    line-height:1.8;
+}
+#monthlyReport{
+    margin-top:15px;
+    background:#2a2a2a;
+    padding:12px;
+    border-radius:10px;
+    font-weight:bold;
+    line-height:1.8;
+}
+#appVersion{
+
+    text-align:center;
+
+    margin-top:30px;
+
+    opacity:.5;
+
+    font-size:14px;
+
+}
+#settingsPanel{
+
+    display:none;
+
+    max-width:1000px;
+
+    margin:15px auto;
+
+    background:#1e1e1e;
+
+    padding:15px;
+
+    border-radius:15px;
+
+}
+
+#settingsPanel button{
+
+    margin:5px;
+
+}
+#settingsPanel{
+    display:none;
+
+    position:absolute;
+
+    right:90px;
+
+    top:0;
+
+    white-space:nowrap;
+
+    z-index:9999;
+
+    background:#1e1e1e;
+
+    border:1px solid #444;
+
+    border-radius:15px;
+
+    padding:15px;
+
+    box-shadow:0 0 20px rgba(0,0,0,.6);
+}
+
+#settingsPanel button{
+    margin:0 5px;
+}
+#settingsWrapper{
+
+    position:relative;
+
+    display:inline-block;
+
+}
