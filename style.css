@@ -2,6 +2,8 @@ body{
     font-family:'Segoe UI',Arial,sans-serif;
     margin:0;
     padding:30px;
+    padding-top:calc(30px + env(safe-area-inset-top));
+    padding-bottom:calc(30px + env(safe-area-inset-bottom));
     background:linear-gradient(135deg,#111,#1d1d1d);
     color:white;
     min-height:100vh;
@@ -450,4 +452,9 @@ canvas{
 
     display:inline-block;
 
+}
+input,
+select,
+button{
+    font-size:16px;
 }
